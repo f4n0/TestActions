@@ -8,7 +8,12 @@ jobs:
         run: echo ${{vars.VERSION}}
   
       - name: modify var
-        run: echo "VERSION=1.0.1" >> "$GITHUB_VARS"
+        uses: mmoyaferrer/set-github-variable@v1.0.0
+        with:
+            name: 'VERSION'
+            value: '1.0.1'
+            repository: f4n0/TestActions
+            token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
       - name: echo var post
         run: echo ${{vars.VERSION}}
