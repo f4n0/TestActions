@@ -5,5 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: echo var
-        run: echo ${{vars}}
+        run: echo ${{vars.Version}}
   
