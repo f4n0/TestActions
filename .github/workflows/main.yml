@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Increment Variable
       run: |
-        echo "NEWVER = $(${{vars.VERSION}} | awk -F. -v OFS=. '{$NF += 1; print}')" >> $GITHUB_ENV
+        echo "NEWVER = $(echo ${{vars.VERSION}} | awk -F. -v OFS=. '{$NF += 1; print}')" >> $GITHUB_ENV
     - name: Edit Variable
       run: |
         curl -L \
