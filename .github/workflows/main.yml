@@ -8,6 +8,9 @@ jobs:
       run: echo ${{vars.VERSION}}
   edit:
     runs-on: ubuntu-latest
+    needs: before
+    permissions: 
+      actions_variables
     steps:
     - name: Edit Variable
       run: |
@@ -19,7 +22,8 @@ jobs:
         https://api.github.com/repos/f4n0/TestActions/actions/variables/VERSION \
         -d '1.0.3'
   post:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
+    needs: edit
     steps:
     - name: echo var post
       run: echo ${{vars.VERSION}}
