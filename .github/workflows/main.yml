@@ -9,8 +9,6 @@ jobs:
   edit:
     runs-on: ubuntu-latest
     needs: before
-    permissions: 
-      actions_variables
     steps:
     - name: Edit Variable
       run: |
