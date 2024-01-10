@@ -1,20 +1,25 @@
 name: "test"
 on: workflow_dispatch
 jobs:
-  test:
+  before:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0
-      with:
-        versionSpec: '5.x'
-    - name: Use GitVersion
-      id: gitversion # step id used as reference for output values
-      uses: gittools/actions/gitversion/execute@v0
-
+    - name: echo var
+      run: echo ${{vars.VERSION}}
+  edit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Edit Variable
+      run: |
+        curl -L \
+        -X PATCH \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/repos/f4n0/TestActions/actions/variables/VERSION \
+        -d '1.0.3'
+  post:
+    runs-on: ubuntu-latest
+    steps:
     - name: echo var post
-      run: echo ${{steps.gitversion.outputs.Major}}.${{steps.gitversion.outputs.Minor}}.${{steps.gitversion.outputs.Patch}}
+      run: echo ${{vars.VERSION}}
