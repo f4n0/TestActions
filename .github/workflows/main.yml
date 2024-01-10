@@ -17,4 +17,4 @@ jobs:
       uses: gittools/actions/gitversion/execute@v0
 
     - name: echo var post
-      run: echo ${{steps.gitversion.outputs.semVer}}
+      run: echo ${{steps.gitversion.outputs.Major}}.${{steps.gitversion.outputs.Minor}}.${{steps.gitversion.outputs.Patch}}
