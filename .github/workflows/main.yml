@@ -4,16 +4,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: echo var pre
-        run: echo ${{vars.VERSION}}
-  
-      - name: modify var
-        uses: mmoyaferrer/set-github-variable@v1.0.0
-        with:
-            name: 'VERSION'
-            value: '1.0.1'
-            repository: f4n0/TestActions
-            token: ${{ secrets.REPO_ACCESS_TOKEN }}
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0
+      with:
+        versionSpec: '5.x'
+    - name: Use GitVersion
+      id: gitversion # step id used as reference for output values
+      uses: gittools/actions/gitversion/execute@v0
 
-      - name: echo var post
-        run: echo ${{vars.VERSION}}
+    - name: echo var post
+      run: echo ${{steps.gitversion.outputs.semVer}}
