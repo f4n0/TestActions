@@ -13,4 +13,4 @@ jobs:
   Comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/milestones
+      - uses: ./.github/milestones/action.yml
